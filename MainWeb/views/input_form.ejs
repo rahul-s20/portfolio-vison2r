@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--==================== UNICONS ====================-->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.6/css/line.css">
+
+    <!--==================== SWIPER CSS ====================-->
+    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+
+    <!--==================== CSS ====================-->
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <title>Muhammad Fadhila Abiyyu Faris</title>
+</head>
+<body>
+<!--==================== HEADER ====================-->
+<%- include('shared/header.ejs') -%>
+<main class="main">
+    <section class="home section" id="home">
+<div>
+    <form action="" class=".contact__form grid">
+        <div class="frame">
+            <div class="center">
+                <div class="title">
+                    <h1>Drop file to upload</h1>
+                </div>
+        
+                <div class="dropzone">
+                    <img src="http://100dayscss.com/codepen/upload.svg" class="upload-icon" />
+                    <input type="file" class="upload-input" />
+                </div>
+        
+                <button type="button" class="btn" name="uploadbutton">Upload file</button>
+        
+            </div>
+        </div>
+        <div class="contact__inputs grid">
+            <div class="contact__content">
+                <label for="" class="contact__label">Name</label>
+                <input type="text" class="contact__input">
+            </div>
+            <div class="contact__content">
+                <label for="" class="contact__label">Email</label>
+                <input type="email" class="contact__input">
+            </div>
+        </div>
+        <div class="contact__content">
+            <label for="" class="contact__label">Project</label>
+            <input type="text" class="contact__input">
+        </div>
+        <div class="contact__content">
+            <label for="" class="contact__label">Message</label>
+            <textarea name="" id="" cols="0" rows="7" class="contact__input"></textarea>
+            <input type="text" class="contact__input">
+        </div>
+    
+        <div>
+            <a href="#" class="button button--flex">
+                Send Message
+                <i class="uil uil-message button__icon"></i>
+            </a>
+        </div>
+    </form>
+</div>
+</section>
+</main>
+
+<!--==================== SCROLL TOP ====================-->
+<a href="#" class="scrollup" id="scroll-up">
+    <i class="uil uil-arrow-up scrollup__icon"></i>
+</a>
+
+
+<!--==================== SWIPER JS ====================-->
+<script src="assets/js/swiper-bundle.min.js"></script>
+
+<!--==================== MAIN JS ====================-->
+<script src="assets/js/main.js"></script>
+</body>
+</html>

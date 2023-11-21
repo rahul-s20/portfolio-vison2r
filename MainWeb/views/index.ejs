@@ -13,60 +13,12 @@
     <!--==================== CSS ====================-->
     <link rel="stylesheet" href="assets/css/styles.css">
 
-    <title>Muhammad Fadhila Abiyyu Faris</title>
+    <title><%= all_data.first_name %> <%= all_data.middle_name %> <%= all_data.last_name %></title>
 </head>
 <body>
 <!--==================== HEADER ====================-->
-<header class="header" id="header">
-    <nav class="nav container">
-        <a href="#" class="nav__logo">Fadhila</a>
+<%- include('shared/header.ejs') -%>
 
-        <div class="nav__menu" id="nav-menu">
-            <ul class="nav__list grid">
-                <li class="nav__item">
-                    <a href="#home" class="nav__link active-link">
-                        <i class="uil uil-estate nav__icon"></i> Home
-                    </a>
-                </li>
-                <li class="nav__item">
-                    <a href="#about" class="nav__link">
-                        <i class="uil nav__icon uil-user"></i> About
-                    </a>
-                </li>
-                <li class="nav__item">
-                    <a href="#skills" class="nav__link">
-                        <i class="uil nav__icon uil-file-alt"></i> Skills
-                    </a>
-                </li>
-                <li class="nav__item">
-                    <a href="#services" class="nav__link">
-                        <i class="uil nav__icon uil-briefcase-alt"></i> Services
-                    </a>
-                </li>
-                <li class="nav__item">
-                    <a href="#portfolio" class="nav__link">
-                        <i class="uil nav__icon uil-scenery"></i> Portfolio
-                    </a>
-                </li>
-                <li class="nav__item">
-                    <a href="#contact" class="nav__link">
-                        <i class="uil nav__icon uil-message"></i> Contactme
-                    </a>
-                </li>
-            </ul>
-            <i class="uil uil-times nav__close" id="nav-close"></i>
-        </div>
-
-        <div class="nav__btns">
-            <!-- Theme change button -->
-            <i class="uil uil-moon change-theme" id="theme-button"></i>
-
-            <div class="nav__toggle" id="nav-toggle">
-                <i class="uil uil-apps"></i>
-            </div>
-        </div>
-    </nav>
-</header>
 
 <!--==================== MAIN ====================-->
 <main class="main">
@@ -75,13 +27,13 @@
         <div class="home__container container grid">
             <div class="home__content grid">
                 <div class="home__social">
-                    <a href="https://www.linkedin.com/in/muhammad-fadhila/" target="_blank" class="home__social-icon">
+                    <a href= '<%= all_data.linkedin_url %>' target="_blank" class="home__social-icon">
                         <i class="uil uil-linkedin-alt"></i>
                     </a>
-                    <a href="https://dribbble.com/Fadhila36" target="_blank" class="home__social-icon">
+                    <!-- <a href="https://dribbble.com/Fadhila36" target="_blank" class="home__social-icon">
                         <i class="uil uil-dribbble"></i>
-                    </a>
-                    <a href="https://www.github.com/fadhila36" target="_blank" class="home__social-icon">
+                    </a> -->
+                    <a href='<%= all_data.github_url %>' target="_blank" class="home__social-icon">
                         <i class="uil uil-github-alt"></i>
                     </a>
                 </div>
@@ -263,89 +215,65 @@
             <div class="qualification__sections">
                 <!-- 1 -->
                 <div class="qualification__content qualification__active" data-content id="education">
-                    <!-- 1 -->
-                    <div class="qualification__data">
-                        <div>
-                            <h3 class="qualification__title">Software enginering</h3>
-                            <span class="qualification__subtitle">Vocational High School 1 Karawang</span>
-                            <div class="qualification__calendar">
-                                <i class="uil uil-calendar-alt"></i>
-                                2015 - 2018
+                    <% for(var i=0; i< all_data.qualification.length; i++) { %>
+                        <% if(i % 2 == 0) { %>
+                        <div class="qualification__data">
+                            <div>
+                                <h3 class="qualification__title"><%= all_data.qualification[i].title %></h3>
+                                <span class="qualification__subtitle"><%= all_data.qualification[i].org %></span>
+                                <div class="qualification__calendar">
+                                    <i class="uil uil-calendar-alt"></i>
+                                    <%= all_data.qualification[i].tenure_from %> - <%= all_data.qualification[i].tenure_to %>
+                                </div>
                             </div>
-                        </div>
-
-                        <div>
-                            <span class="qualification__rounder"></span>
-                            <span class="qualification__line"></span>
-                        </div>
-                    </div>
-
-                    <!-- 2 -->
-                    <div class="qualification__data">
-                        <div></div>
-
-                        <div>
-                            <span class="qualification__rounder"></span>
-                            <!-- <span class="qualification__line"></span> -->
-                        </div>
-
-                        <div>
-                            <h3 class="qualification__title">Computer Science</h3>
-                            <span class="qualification__subtitle">University of Buana Perjuangan Karawang</span>
-                            <div class="qualification__calendar">
-                                <i class="uil uil-calendar-alt"></i>
-                                2018 - Till now
+    
+                            <div>
+                                <span class="qualification__rounder"></span>
+                                <span class="qualification__line"></span>
+                                <% if (i+1 == all_data.qualification.length) {%>
+                                    <span class="qualification__rounder"></span>
+                                    <!-- <span class="qualification__line"></span> -->
+                                <% } %>
                             </div>
+                             
                         </div>
-                    </div>
+                        <% } else {%>
 
-                    <!-- 3 -->
-                    <!-- <div class="qualification__data">
-                        <div>
-                            <h3 class="qualification__title">Web Development</h3>
-                            <span class="qualification__subtitle">Peru - Institute</span>
-                            <div class="qualification__calendar">
-                                <i class="uil uil-calendar-alt"></i>
-                                2017 - 2019
+                            <div class="qualification__data">
+                                <div></div>
+
+                                <div>
+                                    <span class="qualification__rounder"></span>
+                                    <span class="qualification__line"></span>
+                                </div>
+
+                                <div>
+                                    <h3 class="qualification__title"><%= all_data.qualification[i].title %></h3>
+                                    <span class="qualification__subtitle"><%= all_data.qualification[i].org %></span>
+                                    <div class="qualification__calendar">
+                                        <i class="uil uil-calendar-alt"></i>
+                                        <%= all_data.qualification[i].tenure_from %> - <%= all_data.qualification[i].tenure_to %>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-
-                        <div>
-                            <span class="qualification__rounder"></span> -->
-                            <!-- <span class="qualification__line"></span> -->
-                        <!-- </div>
-                    </div> -->
-
-                    <!-- 4 -->
-                    <!-- <div class="qualification__data">
-                        <div></div>
-
-                        <div> -->
-                            <!-- <span class="qualification__rounder"></span> -->
-                            <!-- <span class="qualification__line"></span> -->
-                        <!-- </div> -->
-
-                        <!-- <div>
-                            <h3 class="qualification__title">Master in Ui/Ux</h3>
-                            <span class="qualification__subtitle">Peru - Institute</span>
-                            <div class="qualification__calendar">
-                                <i class="uil uil-calendar-alt"></i>
-                                2019 - 2021
-                            </div>
-                        </div>
-                    </div> -->
+                        <% } %>   
+                        <% } %>
+                        
+                        
 
                 </div>
                 <!-- 2 -->
                 <div class="qualification__content" data-content id="work">
-                    <!-- 1 -->
+                    <% for(var i=0; i< all_data.experience.length; i++) { %>
+                        <% if(i % 2 == 0) {%>
+                            <!-- 1 -->
                     <div class="qualification__data">
                         <div>
-                            <h3 class="qualification__title">Web Developer</h3>
-                            <span class="qualification__subtitle">Reepal - Karawang</span>
+                            <h3 class="qualification__title"><%= all_data.experience[i].title %></h3>
+                            <span class="qualification__subtitle"><%= all_data.experience[i].org %></span>
                             <div class="qualification__calendar">
                                 <i class="uil uil-calendar-alt"></i>
-                                2016 - 2017
+                                <%= all_data.experience[i].tenure_from %> - <%= all_data.experience[i].tenure_to %>
                             </div>
                         </div>
 
@@ -354,8 +282,8 @@
                             <span class="qualification__line"></span>
                         </div>
                     </div>
-
-                    <!-- 2 -->
+                        <% } else {%>
+                            <!-- 2 -->
                     <div class="qualification__data">
                         <div></div>
 
@@ -365,32 +293,17 @@
                         </div>
 
                         <div>
-                            <h3 class="qualification__title">Fullstack Web Developer</h3>
-                            <span class="qualification__subtitle">Pusdatin - University of Buana Perjuangan Karawang</span>
+                            <h3 class="qualification__title"><%= all_data.experience[i].title %></h3>
+                            <span class="qualification__subtitle"><%= all_data.experience[i].org %></span>
                             <div class="qualification__calendar">
                                 <i class="uil uil-calendar-alt"></i>
-                                2018 - Till now
+                                <%= all_data.experience[i].tenure_from %> - <%= all_data.experience[i].tenure_to %>
                             </div>
                         </div>
                     </div>
-
-                    <!-- 3 -->
-                    <div class="qualification__data">
-                        <div>
-                            <h3 class="qualification__title">Freelance Web Developer</h3>
-                            <span class="qualification__subtitle">Unifisyt - Karawang</span>
-                            <div class="qualification__calendar">
-                                <i class="uil uil-calendar-alt"></i>
-                                2020 - Till now
-                            </div>
-                        </div>
-
-                        <div>
-                            <span class="qualification__rounder"></span>
-                            <!-- <span class="qualification__line"></span> -->
-                        </div>
-                    </div>
-
+                         <% } %>
+                    <% } %>
+                    
                 </div>
             </div>
         </div>
@@ -402,117 +315,34 @@
         <span class="section__subtitle">What i offer</span>
         
         <div class="services__container container grid">
-            <!--==================== SERVICES 1 ====================-->
-            <div class="services__content">
-                <div>
-                    <i class="uil uil-web-grid services__icon"></i>
-                    <h3 class="services__title">UI/UX <br> Designer</h3>
-                </div>
-                <span class="button button--flex button--small button--link services__button">
-                    View More
-                    <i class="uil uil-arrow-right button__icon"></i>
-                </span>
-                
-                <div class="services__modal">
-                    <div class="services__modal-content">
-                        <h4 class="services__modal-title">UI/UX <br> Designer</h4>
-                        <i class="uil uil-times services__modal-close"></i>
-                        
-                        <ul class="services__modal-services grid">
-                            <li class="services__modal-service">
-                                <i class="uil uil-check-circle services__modal-icon"></i>
-                                <p>I develop the user interface.</p>
-                            </li>
-                            <li class="services__modal-service">
-                                <i class="uil uil-check-circle services__modal-icon"></i>
-                                <p>Web page development.</p>
-                            </li>
-                            <li class="services__modal-service">
-                                <i class="uil uil-check-circle services__modal-icon"></i>
-                                <p>I create ux element interactions.</p>
-                            </li>
-                            <li class="services__modal-service">
-                                <i class="uil uil-check-circle services__modal-icon"></i>
-                                <p>I position your company.</p>
-                            </li>
-                        </ul>
+            <% for(var i=0; i< all_data.services_offered.length; i++) { %>
+                <div class="services__content">
+                    <div>
+                        <i class="uil uil-web-grid services__icon"></i>
+                        <h3 class="services__title"><%= all_data.services_offered[i].title.split(" ")[0] %> <br> <%= all_data.services_offered[i].title.split(" ")[1] %></h3>
+                    </div>
+                    <span class="button button--flex button--small button--link services__button">
+                        View More
+                        <i class="uil uil-arrow-right button__icon"></i>
+                    </span>
+                    
+                    <div class="services__modal">
+                        <div class="services__modal-content">
+                            <h4 class="services__modal-title"><%= all_data.services_offered[i].title.split(" ")[0] %> <br> <%= all_data.services_offered[i].title.split(" ")[1] %></h4>
+                            <i class="uil uil-times services__modal-close"></i>
+                            
+                            <ul class="services__modal-services grid">
+                                <% for(var j=0; j < all_data.services_offered[i].key_points.length; j++) {%>
+                                    <li class="services__modal-service">
+                                        <i class="uil uil-check-circle services__modal-icon"></i>
+                                        <p><%= all_data.services_offered[i].key_points[j] %></p>
+                                    </li>
+                                <% } %>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!--==================== SERVICES 2 ====================-->
-            <div class="services__content">
-                <div>
-                    <i class="uil uil-arrow services__icon"></i>
-                    <h3 class="services__title">Frontend <br> Developer</h3>
-                </div>
-                <span class="button button--flex button--small button--link services__button">
-                    View More
-                    <i class="uil uil-arrow-right button__icon"></i>
-                </span>
-                
-                <div class="services__modal">
-                    <div class="services__modal-content">
-                        <h4 class="services__modal-title">Frontend <br> Developer</h4>
-                        <i class="uil uil-times services__modal-close"></i>
-                        
-                        <ul class="services__modal-services grid">
-                            <li class="services__modal-service">
-                                <i class="uil uil-check-circle services__modal-icon"></i>
-                                <p>I develop the user interface.</p>
-                            </li>
-                            <li class="services__modal-service">
-                                <i class="uil uil-check-circle services__modal-icon"></i>
-                                <p>Web page development.</p>
-                            </li>
-                            <li class="services__modal-service">
-                                <i class="uil uil-check-circle services__modal-icon"></i>
-                                <p>I create ux element interactions.</p>
-                            </li>
-                            <li class="services__modal-service">
-                                <i class="uil uil-check-circle services__modal-icon"></i>
-                                <p>I position your company.</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!--==================== SERVICES 3 ====================-->
-            <div class="services__content">
-                <div>
-                    <i class="uil uil-pen services__icon"></i>
-                    <h3 class="services__title">Backend <br> Developer</h3>
-                </div>
-                <span class="button button--flex button--small button--link services__button">
-                    View More
-                    <i class="uil uil-arrow-right button__icon"></i>
-                </span>
-                
-                <div class="services__modal">
-                    <div class="services__modal-content">
-                        <h4 class="services__modal-title">Backend <br> Developer</h4>
-                        <i class="uil uil-times services__modal-close"></i>
-                        
-                        <ul class="services__modal-services grid">
-                            <li class="services__modal-service">
-                                <i class="uil uil-check-circle services__modal-icon"></i>
-                                <p>Integration of front-end element.</p>
-                            </li>
-                            <li class="services__modal-service">
-                                <i class="uil uil-check-circle services__modal-icon"></i>
-                                <p>Performs technical analyses for development of new features.</p>
-                            </li>
-                            <li class="services__modal-service">
-                                <i class="uil uil-check-circle services__modal-icon"></i>
-                                <p>Develops new and maintains existing applications.</p>
-                            </li>
-                            <li class="services__modal-service">
-                                <i class="uil uil-check-circle services__modal-icon"></i>
-                                <p>I position your company.</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <% } %> 
         </div>
     </section>
 
@@ -834,8 +664,8 @@
     <div class="footer__bg">
         <div class="footer__container container grid">
             <div>
-                <h1 class="footer__title">Fadhila</h1>
-                <span class="footer__subtitle">Fullstack web developer</span>
+                <h1 class="footer__title"><%= all_data.last_name %></h1>
+                <span class="footer__subtitle"><%= all_data.title %></span>
             </div>
 
             <ul class="footer__links">
@@ -859,7 +689,7 @@
                 </a>
             </div>
 
-            <p class="footer__copy">&#169; Muhammad Fadhila Abiyyu Faris. All right reserved</p>
+            <p class="footer__copy">&#169; <%= all_data.first_name %> <%= all_data.middle_name %> <%= all_data.last_name %>. All right reserved</p>
         </div>
     </div>
 </footer>
